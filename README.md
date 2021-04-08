@@ -31,60 +31,74 @@ how to switch between the LittleFileSystem and the FatFileSystem.
 
 ## Usage
 
-#### Import the example
+### Import the example
 
 Make sure you have an Mbed development environment set up. [Get started with Mbed OS](https://os.mbed.com/docs/latest/tutorials/mbed-os-quick-start.html)
 to set everything up.
 
 From the command-line, import the example:
 
+* Mbed CLI 2
+```
+mbed-tools import mbed-os-example-filesystem
+cd mbed-os-example-filesystem
+```
+
+* Mbed CLI 1
 ```
 mbed import mbed-os-example-filesystem
 cd mbed-os-example-filesystem
 ```
 
-#### Compile the example
+### Compile the example
 
-Invoke `mbed compile`, and specify the name of your platform and your favorite
-toolchain. For example, for the ARM toolchain:
+Specify the name of your platform and the toolchain to use. For example, for the ARM toolchain:
 
+* Mbed CLI 2
+```
+mbed-tools compile -m K64F -t ARM
+```
+
+* Mbed CLI 1
 ```
 mbed compile -m K64F -t ARM
 ```
 
 Your PC may take a few minutes to compile your code. At the end, you see the
-following result:
+following result with Mbed CLI 2:
 
 ```
-[snip]
-| Module              |  .text |.data |   .bss |
-|---------------------|--------|------|--------|
-| [lib]/c_w.l         |  13137 |   16 |    348 |
-| [lib]/fz_wm.l       |     34 |    0 |      0 |
-| [lib]/libcppabi_w.l |     44 |    0 |      0 |
-| [lib]/m_wm.l        |     48 |    0 |      0 |
-| anon$$obj.o         |     32 |    0 | 197888 |
-| main.o              |   2406 |    0 |    256 |
-| mbed-os/components  |   5568 |    0 |      0 |
-| mbed-os/drivers     |   2700 |    0 |   1136 |
-| mbed-os/events      |   1716 |    0 |   3108 |
-| mbed-os/features    |  16586 |    0 |    509 |
-| mbed-os/hal         |   1622 |    4 |     67 |
-| mbed-os/platform    |   7009 |   64 |    542 |
-| mbed-os/rtos        |  12132 |  168 |   6634 |
-| mbed-os/targets     |  19773 |   12 |    985 |
-| Subtotals           |  82807 |  264 | 211473 |
-Total Static RAM memory (data + bss): 211737 bytes
-Total Flash memory (text + data): 83071 bytes
-
-Image: ./BUILD/K64F/ARM/mbed-os-example-filesystem.bin
+| Module           |         .text |       .data |          .bss |
+|------------------|---------------|-------------|---------------|
+| [fill]           |     234(+234) |       4(+4) |   2577(+2577) |
+| [lib]/c.a        | 19465(+19465) | 2472(+2472) |       58(+58) |
+| [lib]/gcc.a      |     972(+972) |       0(+0) |         0(+0) |
+| [lib]/misc       |     188(+188) |       4(+4) |       28(+28) |
+| [lib]/nosys.a    |       32(+32) |       0(+0) |         0(+0) |
+| main.cpp.obj     |   2289(+2289) |       0(+0) |     312(+312) |
+| mbed-os/cmsis    | 10156(+10156) |   168(+168) |   5952(+5952) |
+| mbed-os/drivers  |   1995(+1995) |       0(+0) |   1096(+1096) |
+| mbed-os/events   |   1563(+1563) |       0(+0) |   3104(+3104) |
+| mbed-os/hal      |   1699(+1699) |       8(+8) |     115(+115) |
+| mbed-os/platform |   9148(+9148) |   260(+260) |     457(+457) |
+| mbed-os/rtos     |   1743(+1743) |       0(+0) |         8(+8) |
+| mbed-os/storage  | 18747(+18747) |       0(+0) |     204(+204) |
+| mbed-os/targets  | 13182(+13182) |     36(+36) |   1033(+1033) |
+| Subtotals        | 81413(+81413) | 2952(+2952) | 14944(+14944) |
+Total Static RAM memory (data + bss): 17896(+17896) bytes
+Total Flash memory (text + data): 84365(+84365) bytes
 ```
+
+The binary is located at:
+* **Mbed CLI 2** - `./cmake_build/<TARGET>/develop/<TOOLCHAIN>/mbed-os-example-filesystem.bin`
+* **Mbed CLI 1** - `./BUILD/<TARGET>/<TOOLCHAIN>/mbed-os-example-filesystem.bin`
+
 
 #### Run the example
 
 1. Connect your Mbed Enabled device to the computer over USB.
 1. Open a serial terminal to to the serial port of your connected target. For
-   example, `mbed sterm`.
+   example, `mbed-tools sterm` (CLI 2) or `mbed sterm` (CLI 1).
 1. Copy the binary file to the Mbed Enabled device.
 1. Press the reset button to start the program.
 
